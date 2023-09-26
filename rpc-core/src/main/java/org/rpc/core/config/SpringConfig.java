@@ -18,10 +18,9 @@ import org.springframework.stereotype.Component;
 public class SpringConfig {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        People people = context.getBean("student", Student.class);
-       // Dog dog = context.getBean("dog", Dog.class);
-       // System.out.println(dog.say("wocao"));
-//        System.out.println(dog.say("汪"));
-//        System.out.println(people.say("人"));
+        Dog dog = context.getBean("dog", Dog.class);
+        Student student = context.getBean("student", Student.class);
+        System.out.println(student.say("人"));
+        System.out.println(dog.say("wang"));
     }
 }

@@ -7,5 +7,5 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 public @interface RpcAutowired {
-        String version() default " ";
+        String version() default "1";
 }

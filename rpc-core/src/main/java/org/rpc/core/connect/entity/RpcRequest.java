@@ -1,8 +1,9 @@
 package org.rpc.core.connect.entity;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class RpcRequest {
+public class RpcRequest implements Serializable {
     private static final long serialVersionUID = 1905122041950251207L;
     private String requestId;
     private String interfaceName;
