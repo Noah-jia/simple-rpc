@@ -14,9 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -52,7 +50,7 @@ public class ZkUtils {
                 log.info("The node already exists. The node is:[{}]", path);
             } else {
                 //eg: /my-rpc/github.javaguide.HelloService/127.0.0.1:9999
-                zkClient.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath(path);
+                zkClient.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(path);
                 log.info("服务创建的路径[{}]", path);
             }
             REGISTERED_PATH_SET.add(path);
@@ -72,16 +70,23 @@ public class ZkUtils {
             return SERVICE_ADDRESS_MAP.get(rpcServiceName);
         }
         List<String> result = null;
+       // String servicePath1 = getServicePath(rpcServiceName, version);
         String servicePath = getPrePath(rpcServiceName,version);
         log.info("要找的服务路径:"+servicePath);
+        ArrayList<String> addressList =new ArrayList<>();
         try {
             result = zkClient.getChildren().forPath(servicePath);
-            SERVICE_ADDRESS_MAP.put(rpcServiceName, result);
+            for (String s : result) {
+                byte[] bytes = zkClient.getData().forPath(servicePath + "/" + s);
+                String address = new String(bytes);
+                addressList.add(address);
+            }
+            SERVICE_ADDRESS_MAP.put(rpcServiceName, addressList);
             registerWatcher(rpcServiceName);
         } catch (Exception e) {
             log.error("get children nodes for path [{}] fail", servicePath);
         }
-        return result;
+        return addressList;
     }
 
     /**
@@ -126,12 +131,12 @@ public class ZkUtils {
     public InetSocketAddress loadService(RpcRequest rpcRequest){
         String interfaceName = rpcRequest.getInterfaceName();
         String version = rpcRequest.getVersion();
-        List<String> serviceList = getChildrenNodes( interfaceName,version);
+        List<String> serviceList = getChildrenNodes(interfaceName,version);
         if(CollectionUtils.isEmpty(serviceList)){
             throw new RuntimeException("没有可用服务");
         }
         String service = loadBalance.getOne(serviceList);
-        System.out.println(service);
+        System.out.println("找到的IP地址:"+service);
         return new InetSocketAddress(service, 8888);
     }
 

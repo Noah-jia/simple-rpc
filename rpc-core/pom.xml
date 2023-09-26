@@ -117,6 +117,10 @@
             <version>1.7.2</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+        </dependency>
 
     </dependencies>
     <build>

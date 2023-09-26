@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
 
-@Component
+//@Component
 public class SocketClient implements RequestTransport {
 
     @Override

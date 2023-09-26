@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
+import java.util.Timer;
+
 
 @ComponentScan({"org.rpc.core.*"})
 @Configuration
@@ -18,9 +20,14 @@ import org.springframework.stereotype.Component;
 public class SpringConfig {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        Dog dog = context.getBean("dog", Dog.class);
+        //Dog dog = context.getBean("dog", Dog.class);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Student student = context.getBean("student", Student.class);
         System.out.println(student.say("人"));
-        System.out.println(dog.say("wang"));
+        //System.out.println(dog.say("wang"));
     }
 }

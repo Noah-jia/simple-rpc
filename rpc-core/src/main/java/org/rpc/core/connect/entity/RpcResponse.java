@@ -2,7 +2,7 @@ package org.rpc.core.connect.entity;
 
 import java.io.Serializable;
 
-public class RpcResponse<T> implements Serializable {
+public class RpcResponse implements Serializable {
     private static final long serialVersionUID = 715745410605631233L;
     private String requestId;
     /**
@@ -16,9 +16,9 @@ public class RpcResponse<T> implements Serializable {
     /**
      * response body
      */
-    private T data;
-    public static <T> RpcResponse<T> success(T data, String requestId) {
-        RpcResponse<T> response = new RpcResponse<>();
+    private Object data;
+    public   RpcResponse success(Object data, String requestId) {
+        RpcResponse response = new RpcResponse();
         response.setCode(200);
         response.setMessage("成功");
         response.setRequestId(requestId);
@@ -27,8 +27,8 @@ public class RpcResponse<T> implements Serializable {
         }
         return response;
     }
-    public static <T> RpcResponse<T> fail() {
-        RpcResponse<T> response = new RpcResponse<>();
+    public   RpcResponse fail() {
+        RpcResponse response = new RpcResponse();
         response.setCode(400);
         response.setMessage("失败");
         return response;
@@ -59,11 +59,11 @@ public class RpcResponse<T> implements Serializable {
         this.message = message;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 }

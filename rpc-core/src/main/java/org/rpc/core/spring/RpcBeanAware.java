@@ -30,7 +30,7 @@ public class RpcBeanAware implements BeanPostProcessor{
     public static Map<String,Object> serviceMap=new ConcurrentHashMap<>();
     private static final Logger logger= LogManager.getLogger(RpcBeanAware.class);
 
-    @Qualifier
+    @Autowired
     private RequestTransport requestTransport;
     @Autowired
     private ZkUtils zkUtils;
@@ -85,7 +85,8 @@ public class RpcBeanAware implements BeanPostProcessor{
                 RpcComponent  rpcComponent=(RpcComponent) beanAnnotation;
                 String version = rpcComponent.version();
                 RpcBeanConfig rpcBeanConfig = new RpcBeanConfig(bean, version);
-                serviceMap.put(beanName + RpcConstants.SERVICE_SPLIT+version, rpcBeanConfig);
+                String interfaceName = bean.getClass().getInterfaces()[0].getCanonicalName();
+                serviceMap.put(interfaceName + RpcConstants.SERVICE_SPLIT+version, rpcBeanConfig);
                 //注册到Zk
                 toZk(rpcBeanConfig);
             }
