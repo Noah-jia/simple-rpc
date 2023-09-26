@@ -5,26 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03e30cb3-3fae-4ec8-995b-e4143531aa0d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/entity/RpcMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/client/RequestHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/codec/RpcDecoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/codec/RpcEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/server/NettyServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/server/ResponseHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/serialize/Serialize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/serialize/kryo/KryoSerialize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/KryoSingle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/config/SpringConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/entity/RpcResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/entity/RpcResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/client/NettyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/NettyService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/socket/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/socket/SocketClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/proxy/client/RpcBeanProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/proxy/client/RpcBeanProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/RpcBeanAware.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/RpcBeanAware.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/ZkUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/ZkUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/future/RpcFuture.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "netty",
+    "git-widget-placeholder": "future",
     "jdk.selected.JAVA_MODULE": "1.8",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
