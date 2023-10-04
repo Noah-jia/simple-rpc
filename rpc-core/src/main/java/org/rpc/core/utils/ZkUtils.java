@@ -136,7 +136,7 @@ public class ZkUtils {
             throw new RuntimeException("没有可用服务");
         }
         String service = loadBalance.getOne(serviceList);
-        System.out.println("找到的IP地址:"+service);
+        log.debug("找到的IP地址:"+service);
         return new InetSocketAddress(service, 8888);
     }
 

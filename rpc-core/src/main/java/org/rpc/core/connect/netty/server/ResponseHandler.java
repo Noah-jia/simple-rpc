@@ -1,5 +1,7 @@
 package org.rpc.core.connect.netty.server;
 
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.logging.log4j.LogManager;
@@ -38,7 +40,7 @@ public class ResponseHandler extends SimpleChannelInboundHandler<RpcMessage> {
         logger.info("客户端收到的请求为:"+rpcMessage);
         RpcRequest content = (RpcRequest) rpcMessage.getContent();
         RpcResponse response=handlerRequest(content);
-        RpcMessage responseMessage = new RpcMessage(1L, 1, response);
+        RpcMessage responseMessage = new RpcMessage(rpcMessage.getRequestId(), RpcMessage.RESPONSE, response);
         channelHandlerContext.writeAndFlush(responseMessage);
     }
 }

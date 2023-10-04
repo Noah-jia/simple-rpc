@@ -23,7 +23,6 @@ public class RpcDecoder extends ByteToMessageDecoder {
     private KryoSerialize serialize;
     public RpcDecoder() {
         this.serialize= KryoSingle.getInstance();
-        System.out.println("decoder:"+serialize.kryo);
     }
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf in, List<Object> list) throws Exception {

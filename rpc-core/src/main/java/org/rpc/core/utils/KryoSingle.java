@@ -5,6 +5,9 @@ import org.rpc.core.serialize.kryo.KryoSerialize;
 
 public class KryoSingle {
     private static  volatile KryoSerialize kryo;
+    private KryoSingle(){
+
+    }
     public static KryoSerialize getInstance(){
         synchronized (KryoSerialize.class){
             if(kryo==null){

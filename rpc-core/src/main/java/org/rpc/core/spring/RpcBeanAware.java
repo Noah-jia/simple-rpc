@@ -58,7 +58,6 @@ public class RpcBeanAware implements BeanPostProcessor{
                     RpcBeanConfig rpcBeanConfig = null;
                     try {
                         rpcBeanConfig = new RpcBeanConfig(type, version);
-                        System.out.println(rpcBeanConfig.getInterfaceName());
                          RpcBeanProxy rpcBeanProxy = new RpcBeanProxy(rpcBeanConfig,requestTransport,zkUtils);
                         Object proxy = getProxy(type,rpcBeanProxy);
                         field.setAccessible(true);

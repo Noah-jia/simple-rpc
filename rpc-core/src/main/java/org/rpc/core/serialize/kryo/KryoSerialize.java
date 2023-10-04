@@ -51,7 +51,6 @@ public class KryoSerialize implements Serialize {
 
     @Override
     public <T> T deserialize(byte[] bytes, Class<T> clazz) {
-        System.out.println("kryo本体:"+kryo);
         this.kryo.register(RpcRequest.class);
         this.kryo.register(RpcResponse.class);
         try(ByteArrayInputStream bais = new ByteArrayInputStream(bytes);

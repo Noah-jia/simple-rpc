@@ -5,9 +5,12 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class RpcFuture implements Future<RpcResponse> {
-    private  Object lock=new Object();
+
+public class SimpleFuture implements Future<RpcResponse> {
+
+    private RpcResponse response;
     private   boolean isDone;
+
     @Override
     public boolean cancel(boolean mayInterruptIfRunning) {
         return false;
@@ -17,20 +20,34 @@ public class RpcFuture implements Future<RpcResponse> {
     public boolean isCancelled() {
         return false;
     }
+    public void done(){
+        this.isDone=true;
+        synchronized (this){
+            this.notifyAll();
+        }
+    }
 
     @Override
     public boolean isDone() {
-        return isDone;
+       return this.isDone;
+    }
+
+    public void setResponse(RpcResponse response) {
+        this.response = response;
     }
 
     @Override
     public RpcResponse get() throws InterruptedException, ExecutionException {
-        while (true){
-            if(!isDone){
-                
+        synchronized (this) {
+            while (true) {
+                if (!isDone) {
+                    this.wait();
+                }else{
+                    //处理数据
+                    return response;
+                }
             }
         }
-        return null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.rpc.core.future;
+package org.rpc.core.future.RpcFuture;
 
 import com.sun.org.apache.regexp.internal.RE;
 import io.netty.util.concurrent.Promise;

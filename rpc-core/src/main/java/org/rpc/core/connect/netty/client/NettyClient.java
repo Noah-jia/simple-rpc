@@ -5,33 +5,33 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.DefaultPromise;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.aspectj.lang.annotation.Before;
 import org.rpc.core.connect.RequestTransport;
 import org.rpc.core.connect.entity.RpcMessage;
 import org.rpc.core.connect.entity.RpcRequest;
 import org.rpc.core.connect.entity.RpcResponse;
+import org.rpc.core.connect.entity.SimpleFuture;
 import org.rpc.core.connect.netty.codec.RpcDecoder;
 import org.rpc.core.connect.netty.codec.RpcEncoder;
-import org.rpc.core.serialize.Serialize;
-import org.rpc.core.serialize.kryo.KryoSerialize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
+import org.rpc.core.future.RpcFuture.FutureFactory;
+import org.rpc.core.future.RpcFuture.RpcFuture;
+import org.rpc.core.utils.ClientBlockQueueSingleton;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 @Component
 public class NettyClient implements RequestTransport {
 
     private static final Logger logger= LogManager.getLogger(NettyClient.class);
-    public static final Map<String,LinkedBlockingQueue<RpcResponse>> responseMap=new ConcurrentHashMap<>();
+    //发送请求后，等待获取结果的结果集
+    public static final Map<Long,SimpleFuture> futureMap=new ConcurrentHashMap<>();
     private Bootstrap bootstrap;
     private NioEventLoopGroup worker;
     private Channel channel;
@@ -65,6 +65,8 @@ public class NettyClient implements RequestTransport {
                         }
             });
             this.channel=cf.channel();
+            //netty启动后通知发送请求
+            ClientBlockQueueSingleton.getInstance().put("1");
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -77,29 +79,35 @@ public class NettyClient implements RequestTransport {
         String str = inetSocketAddress.getAddress().toString();
         String ip = str.split("/")[1];
         this.inetSocketAddress=new InetSocketAddress(ip, inetSocketAddress.getPort());
-        System.out.println(inetSocketAddress.getAddress().toString());
-        System.out.println(inetSocketAddress.getPort());
         //链接服务端
         new Thread(this::start).start();
+        //等待启动成功再发送
         try {
-            TimeUnit.SECONDS.sleep(2);
+            ClientBlockQueueSingleton.getInstance().take();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        LinkedBlockingQueue<RpcResponse> responseQueue = new LinkedBlockingQueue<>();
-        responseMap.put(channel.id().toString(),responseQueue);
-        RpcMessage rpcMessage = new RpcMessage(1L,0,rpcRequest);
+        RpcFuture<RpcResponse> future = new RpcFuture<>(new DefaultPromise<>(new DefaultEventLoop()));
+        Long requestId = FutureFactory.put(future);
+        RpcMessage rpcMessage = new RpcMessage(requestId,RpcMessage.REQUEST,rpcRequest);
         channel.writeAndFlush(rpcMessage).addListener((ChannelFutureListener) channelFuture -> {
-            if (channelFuture.isSuccess()) {
-                logger.info("发送rpc请求成功");
+            if(channelFuture.isSuccess()){
+                logger.info("发送成功");
             }else{
-                logger.error("发送rpc请求失败");
+               logger.error("发送失败");
             }
         });
+        //发送成功
+        futureMap.put(requestId,new SimpleFuture());
         try {
-            return responseQueue.take();
-        } catch (InterruptedException e) {
+            return futureMap.get(requestId).get();
+        } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
+//        try {
+//            return future.getPromise().get();
+//        } catch (InterruptedException | ExecutionException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

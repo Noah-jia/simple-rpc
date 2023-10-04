@@ -32,11 +32,8 @@ public class BeanAop {
 
     @Around("beanPointCut()")
     public Object afterBean(ProceedingJoinPoint  joinPoint) throws Throwable {
-        System.out.println(joinPoint.getTarget().getClass());
-        System.out.println("开始");
         MethodSignature signature=(MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        System.out.println(method);
         return joinPoint.proceed();
     }
     @Before("beanPointCut2()")

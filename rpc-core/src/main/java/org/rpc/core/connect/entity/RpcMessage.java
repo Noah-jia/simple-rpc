@@ -3,6 +3,8 @@ package org.rpc.core.connect.entity;
 import java.io.Serializable;
 
 public class RpcMessage implements Serializable {
+    public static final int REQUEST=0;
+    public static final  int RESPONSE=1;
     Long requestId;
     int type;
     Object content;

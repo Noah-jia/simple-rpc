@@ -1,17 +1,11 @@
-package org.rpc.core.config;
+package org.rpc.core.spring;
 
 
-import org.rpc.core.spring.RpcBeanAware;
-import org.rpc.core.test.Dog;
-import org.rpc.core.test.People;
 import org.rpc.core.test.Student;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.stereotype.Component;
-
-import java.util.Timer;
 
 
 @ComponentScan({"org.rpc.core.*"})
@@ -21,13 +15,11 @@ public class SpringConfig {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         //Dog dog = context.getBean("dog", Dog.class);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         Student student = context.getBean("student", Student.class);
         System.out.println(student.say("人"));
+        for (int i = 0; i < 100; i++) {
+            System.out.println(student.say(String.valueOf(i)));
+        }
         //System.out.println(dog.say("wang"));
     }
 }

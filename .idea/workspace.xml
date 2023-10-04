@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03e30cb3-3fae-4ec8-995b-e4143531aa0d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/future/RpcFuture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/entity/SimpleFuture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/entity/RpcMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/entity/RpcMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/client/NettyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/client/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/client/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/codec/RpcDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/codec/RpcDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/server/ResponseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/server/ResponseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/future/RpcFuture/FutureFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/future/RpcFuture/FutureFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/future/RpcFuture/RpcFuture.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/future/RpcFuture/RpcFuture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/serialize/kryo/KryoSerialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/serialize/kryo/KryoSerialize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/RpcBeanAware.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/RpcBeanAware.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/SpringConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/aop/BeanAop.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/spring/aop/BeanAop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/test/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/test/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/ClientBlockQueueSingleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/ClientBlockQueueSingleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/KryoSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/KryoSingle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/ZkUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/utils/ZkUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,25 +60,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "future",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "spring.configuration.checksum": "69c7214aad161f22eefa5c84ccb894d5",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;future&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;69c7214aad161f22eefa5c84ccb894d5&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.SpringConfig">
+    <configuration name="ClientBlockQueueSingleton" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.rpc.core.utils.ClientBlockQueueSingleton" />
+      <module name="rpc-core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.rpc.core.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.rpc.core.Main" />
       <module name="rpc-core" />
@@ -77,11 +106,11 @@
       </method>
     </configuration>
     <configuration name="SpringConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.rpc.core.config.SpringConfig" />
+      <option name="MAIN_CLASS_NAME" value="org.rpc.core.spring.SpringConfig" />
       <module name="rpc-core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.rpc.core.config.*" />
+          <option name="PATTERN" value="org.rpc.core.spring.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -92,6 +121,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.SpringConfig" />
+        <item itemvalue="Application.ClientBlockQueueSingleton" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -107,24 +137,32 @@
       <workItem from="1695623336321" duration="814000" />
       <workItem from="1695624157638" duration="5985000" />
       <workItem from="1695700924815" duration="16443000" />
+      <workItem from="1695794191348" duration="5345000" />
+      <workItem from="1696419697791" duration="4138000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/serialize/kryo/KryoSerialize.java</url>
-          <line>56</line>
+          <line>55</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/org/rpc/core/connect/netty/server/ResponseHandler.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

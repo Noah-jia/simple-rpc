@@ -15,6 +15,6 @@ public class Student implements People{
 
     @Override
     public String say(String career) {
-        return "我是一个:"+career+"animal说:"+animal.say("ffafa");
+        return "我是一个:"+career+"animal说:"+animal.say("wang");
     }
 }

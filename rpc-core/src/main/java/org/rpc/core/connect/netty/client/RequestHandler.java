@@ -1,5 +1,6 @@
 package org.rpc.core.connect.netty.client;
 
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.logging.log4j.LogManager;
@@ -7,8 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.rpc.core.connect.entity.RpcMessage;
 import org.rpc.core.connect.entity.RpcResponse;
 
-import javax.xml.ws.Response;
-import java.util.concurrent.LinkedBlockingQueue;
+import org.rpc.core.connect.entity.SimpleFuture;
+import org.rpc.core.future.RpcFuture.FutureFactory;
+import org.rpc.core.future.RpcFuture.RpcFuture;
 
 public class RequestHandler extends SimpleChannelInboundHandler<RpcMessage> {
 
@@ -19,9 +21,9 @@ public class RequestHandler extends SimpleChannelInboundHandler<RpcMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcMessage rpcMessage) throws Exception {
         logger.info("接收到了response");
-        String id = channelHandlerContext.channel().id().toString();
-        LinkedBlockingQueue<RpcResponse> queue = NettyClient.responseMap.get(id);
         RpcResponse content =(RpcResponse) rpcMessage.getContent();
-        queue.put(content);
+        SimpleFuture simpleFuture = NettyClient.futureMap.get(rpcMessage.getRequestId());
+        simpleFuture.setResponse(content);
+        simpleFuture.done();
     }
 }
